@@ -19,9 +19,18 @@ $brand-danger: #bf5329;
 // Typography
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 $font-family-sans-serif: "Raleway", sans-serif;
+$font-family-paginate: 'Amatic SC', cursive;
+    $font-family-title: 'Amatic SC', cursive;
+
 $font-size-base: 14px;
 $line-height-base: 1.6;
 $text-color: #636b6f;
+
+// Pagination page d'accueil
+$font_robot_size_paginate: 1.8rem;
+$font-title-base:2.8rem;
+$font-title-first-letter:150px;
+
 
 // Navbar
 $navbar-default-bg: #fff;
@@ -36,3 +45,5 @@ $input-color-placeholder: lighten($text-color, 30%);
 
 // Panels
 $panel-default-heading-bg: #fff;
+
+

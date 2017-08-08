@@ -12,11 +12,11 @@
     @endif
         <div class="col-lg-4">
             @isset($robot->picture)
-            <img class="img-circle" src="{{url('images', $robot->picture->link)}}" alt="{{$robot->picture->title}}" width="140" height="140">
+            <a class="btn btn-default" href="{{url('robot', [$robot->id, $robot->slug])}}" role="button"><img class="img-circle" src="{{url('images', $robot->picture->link)}}" alt="{{$robot->picture->title}}" width="140" height="140"></a>
             @endisset
-            <h2>{{$robot->name}}</h2>
-            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-            <p><a class="btn btn-default" href="{{url('robot', $robot->id)}}" role="button">Lire la suite &raquo;</a></p>
+            <h2 class="marketing__title">{{$robot->name}}</h2>
+            <p>{{str_limit($robot->description, 100, '...')}}</p>
+            <p><a class="btn btn-default" href="{{url('robot', [$robot->id, $robot->slug])}}" role="button">Lire la suite &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
     @if($count == 2)
     </div> <!-- #end 3 robots -->
@@ -25,8 +25,8 @@
 @else
     <div class="row featurette">
         <div class="col-md-7 {{ $count % 2 == 0 ? 'col-md-push-5' : '' }}">
-          <h2 class="featurette-heading"><a class="btn btn-default" href="{{url('robot', $robot->id)}}" role="button">{{$robot->name}}</a></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading"><a class="btn btn-default" href="{{url('robot', [$robot->id, $robot->slug])}}" role="button">{{$robot->name}}</a></h2>
+            <p>{{str_limit($robot->description, 100, '...')}}</p>
         </div>
         <div class="col-md-5 {{ $count % 2 == 0 ? 'col-md-pull-7' : '' }}">
            @isset($robot->picture)
@@ -38,5 +38,5 @@
 @endif
 @php $count++; @endphp
 @endforeach
-{{ $robots->links() }} 
+{{ $robots->links('front.partials.paginate') }} 
 @endsection

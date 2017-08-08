@@ -14,7 +14,7 @@ class FrontController extends Controller
     {
 
         return view('front.home', [
-            'robots' => Robot::published()->orderBy('published_at', 'DESC')->paginate(5)
+            'robots' => Robot::published()->orderBy('published_at', 'DESC')->paginate(env('PAGINATE_FRONT', 5))
             ]); 
 
     }
@@ -22,15 +22,18 @@ class FrontController extends Controller
 // le premier paramètre c'est id du robot et le deuxième c'est le slug facultatif
     public function showRobot($id, $slug=''){
 
-        // ici on utilise findOrFail pour retourner un robot en fonction de son id 
-        // findOrFail lancera une exception de type  Illuminate\Database\Eloquent\ModelNotFoundException
-        // si le modèle Robot ne trouve pas de robot pour cet identifiant.
-        return Robot::findOrFail($id);
+        $robot =  Robot::findOrFail($id);
+
+        return view('front.single', [
+            'robot' =>$robot
+            ]);
     }
 
     public function showRobotByCat($id, $slug = ''){
 
-            return Category::findOrFail($id)->robots;
+            $robots =  Category::findOrFail($id)->robots()->published()->orderBy('published_at', 'DESC')->paginate(env('PAGINATE_FRONT', 5));
+
+            return view('front.category', ['robots' => $robots]);
     }
 
     public function showContact(){

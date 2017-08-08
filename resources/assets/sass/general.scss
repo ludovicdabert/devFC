@@ -1,0 +1,9 @@
+.marketing__title{
+    &::first-letter{
+        font-size: $font-title-first-letter;
+        color:$brand-danger;
+    }
+
+    font-family: $font-family-title;
+    
+}
