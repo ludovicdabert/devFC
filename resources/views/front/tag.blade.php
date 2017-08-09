@@ -4,6 +4,7 @@
 <div class="row">
 @php $count = 0 ; @endphp
 {{$robots->links('front.partials.paginate')}}
+<h1>Mot clé: <strong>{{$name}}</strong></h1>
     @forelse($robots as $robot)
     <div class="row featurette">
         <div class="col-md-7 {{ $count % 2 == 0 ? 'col-md-push-5' : '' }}">

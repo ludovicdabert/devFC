@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 // alias pour Robot use App\Robot as Robot; pour le premier anti-slash dans le use vous pouvez l'omettre il est
 // automatiquement ajouté dans le use
+use App\Tag;
 use App\Robot; 
 use App\Category;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class FrontController extends Controller
     {
 
         return view('front.home', [
-            'robots' => Robot::published()->orderBy('published_at', 'DESC')->paginate(env('PAGINATE_FRONT', 5))
+            'robots' => Robot::published()->orderBy('published_at', 'DESC')->paginate(env('PAGINATE_FRONT', 5)),
             ]); 
 
     }
@@ -31,9 +32,29 @@ class FrontController extends Controller
 
     public function showRobotByCat($id, $slug = ''){
 
-            $robots =  Category::findOrFail($id)->robots()->published()->orderBy('published_at', 'DESC')->paginate(env('PAGINATE_FRONT', 5));
+        $robots =  Category::findOrFail($id)
+                            ->robots()
+                            ->published()
+                            ->orderBy('published_at', 'DESC')
+                            ->paginate(env('PAGINATE_FRONT', 5));
 
-            return view('front.category', ['robots' => $robots]);
+        return view('front.category', ['robots' => $robots]);
+}
+
+    public function showRobotByTag($id){
+
+        $tag = Tag::findOrFail($id);
+
+        $robots =  $tag
+                        ->robots()
+                        ->published()
+                        ->orderBy('published_at', 'DESC')
+                        ->paginate(env('PAGINATE_FRONT', 5));
+
+        return view('front.tag', [
+            'name' => $tag->name,
+            'robots' => $robots
+            ]);
     }
 
     public function showContact(){

@@ -10,15 +10,7 @@
         @endisset
         <h2 class="marketing__title">{{$robot->name}}</h2>
         <p>{{$robot->description}}</p>
-        @forelse($robot->tags as $tag)
-            <button type="button" class="btn btn-primary">{{$tag->name}}</button>
-        @empty
-        pas de mot clé pour ce robot
-        @endforelse
-        <hr class="featurette-divider">
-        @isset($robot->category)
-             catégorie: <a class="btn"  href="{{url('category', [$robot->category->id, $robot->category->slug] )}}">{{$robot->category->title}}</a>
-        @endisset
+        @include('front.partials.meta_robot')
     </div>
 </div>
 @endsection

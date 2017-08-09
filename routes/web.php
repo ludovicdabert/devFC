@@ -12,14 +12,18 @@
 */
 
 // page d'accueil connectée à la méthode index du FrontController
-Route::get('/', 'FrontController@index');
+Route::get('/', 'FrontController@index')->name('home');
 
 // Afficher un robot en fonction de l'id du robot on peut également passer un slug
 Route::get('/robot/{id}/{slug?}', 'FrontController@showRobot');
-
 Route::get('/category/{id}/{slug?}', 'FrontController@showRobotByCat');
+Route::get('tag/{id}', 'FrontController@showRobotByTag');
 
 // page contact et mentions légales
 Route::get('contact', 'FrontController@showContact');
 Route::get('mentions-legales', 'FrontController@showMentions');
 
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
